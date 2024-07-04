@@ -1,9 +1,13 @@
 {% props radio %}
 
-<twig:RadioCard>
-        <twig:RadioCardBackground logo="{{ radio.logo }}" radio="{{ radio.name }}" color="{{ radio.color }}"/>
-        <twig:RadioCardImage logo="{{ radio.logo }}" name="{{ radio.name }}" />
-        <div class="absolute bottom-2 right-2">
-                <twig:PlayerButton/>
-        </div>
+<twig:RadioCard class="group cursor-pointer">
+    <twig:RadioCardBackground logo="{{ radio.logo }}" radio="{{ radio.name }}" color="{{ radio.color }}"/>
+    <twig:RadioCardImage logo="{{ radio.logo }}" name="{{ radio.name }}"  />
+
+    <div class="absolute bottom-2 right-2 transition-all opacity-25 group-hover:opacity-100">
+        <button data-action="player#play" class="flex justify-center items-center position w-[2.5rem] h-[2.5rem] bg-slate-200/75 rounded-100 rounded-full">
+            <twig:UX:Icon name="play" class="text-slate-50" style="color: black; opacity: .9; fill: none"/>
+        </button>
+    </div>
+
 </twig:RadioCard>

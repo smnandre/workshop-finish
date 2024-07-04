@@ -8,17 +8,17 @@ export default class extends Controller {
     }
 
     play(event) {
-        const source = event.detail.source;
-        const stream = event.detail.stream;
+        if (event) {
+            const source = event.detail.source;
+            const stream = event.detail.stream;
 
-        this.audioTarget.src = source;
+            this.audioTarget.src = source;
+            Turbo.visit(stream);
+            this.audioTarget.load();
+        }
 
-        Turbo.visit(stream);
-
-        this.audioTarget.load();
         this.audioTarget.play();
         this.playing = true;
-
         this.playTarget.classList.remove('hidden');
         this.pauseTarget.classList.add('hidden');
     }
@@ -26,30 +26,11 @@ export default class extends Controller {
     pause() {
         this.audioTarget.pause();
         this.playing = false;
-
         this.playTarget.classList.add('hidden');
         this.pauseTarget.classList.remove('hidden');
     }
 
     toggle() {
-        event.stopImmediatePropagation();
-
-        if (!this.playing) {
-            this.audioTarget.play();
-
-            this.playTarget.classList.remove('hidden');
-            this.pauseTarget.classList.add('hidden');
-            this.playing = true;
-
-            return;
-        }
-
-        if (this.playing) {
-            this.audioTarget.pause();
-
-            this.playTarget.classList.add('hidden');
-            this.pauseTarget.classList.remove('hidden');
-            this.playing = false;
-        }
+      this.playing ? this.pause() : this.play();
     }
 }
